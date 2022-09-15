@@ -204,7 +204,47 @@ if (document.readyState !== "loading") {
   });
 }
 
-function initializeCode() {}
+function initializeCode() {
+  var submitButton = document.querySelector("#submit-data");
+  var usernameElement = document.querySelector("#input-username");
+  var emailElement = document.querySelector("#input-email");
+  var addressElement = document.querySelector("#input-address");
+  var adminElement = document.querySelector("#input-admin");
+  var emptyButton = document.querySelector("#empty-data");
+  var tableElement = document.querySelector("table");
+  submitButton.addEventListener("click", function (event) {
+    event.preventDefault();
+    var lineOfTable = document.createElement("tr");
+    var thUsername = document.createElement("td");
+    thUsername.innerText = usernameElement.value;
+    var thEmail = document.createElement("td");
+    thEmail.innerText = emailElement.value;
+    var thAddress = document.createElement("td");
+    thAddress.innerText = addressElement.value;
+    var thAdmin = document.createElement("td");
+    thAdmin.innerText = adminElement.checked === true ? "X" : "-";
+    lineOfTable.appendChild(thUsername);
+    lineOfTable.appendChild(thEmail);
+    lineOfTable.appendChild(thAddress);
+    lineOfTable.appendChild(thAdmin);
+    tableElement.appendChild(lineOfTable);
+    /*
+    console.log(usernameElement.value)
+    console.log(emailElement.value)
+    console.log(addressElement.value)
+    console.log(adminElement.checked)
+    */
+  });
+  emptyButton.addEventListener("click", function (event) {
+    event.preventDefault(); //console.log(document.querySelector("td").parentNode)
+    //console.log(document.querySelector("data"))
+
+    while (document.querySelector("td") !== null) {
+      var tr = document.querySelector("td").parentNode;
+      tr.parentElement.removeChild(tr);
+    }
+  });
+}
 },{"./styles.css":"src/styles.css"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
