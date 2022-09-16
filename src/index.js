@@ -92,7 +92,7 @@ function initializeCode() {
     }
 */
     let trsToBeRemoved = document.querySelectorAll("tr")
-    for (let i=0; i<trsToBeRemoved.length; i++) {
+    for (let i=1; i<trsToBeRemoved.length; i++) {
       trsToBeRemoved[i].parentElement.removeChild(trsToBeRemoved[i])
     } 
 

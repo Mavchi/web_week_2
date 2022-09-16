@@ -283,7 +283,7 @@ function initializeCode() {
 
     var trsToBeRemoved = document.querySelectorAll("tr");
 
-    for (var i = 0; i < trsToBeRemoved.length; i++) {
+    for (var i = 1; i < trsToBeRemoved.length; i++) {
       trsToBeRemoved[i].parentElement.removeChild(trsToBeRemoved[i]);
     }
   });
