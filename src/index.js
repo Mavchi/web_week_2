@@ -16,7 +16,7 @@ function initializeCode() {
   const emailElement = document.querySelector("#input-email");
   const addressElement = document.querySelector("#input-address");
   const adminElement = document.querySelector("#input-admin");
-  const emptyButton = document.querySelector("#empty-data");
+  const emptyButton = document.querySelector("#empty-table");
   const tableElement = document.querySelector("tbody");
 
   submitButton.addEventListener("click", function (event) {

@@ -210,7 +210,7 @@ function initializeCode() {
   var emailElement = document.querySelector("#input-email");
   var addressElement = document.querySelector("#input-address");
   var adminElement = document.querySelector("#input-admin");
-  var emptyButton = document.querySelector("#empty-data");
+  var emptyButton = document.querySelector("#empty-table");
   var tableElement = document.querySelector("tbody");
   submitButton.addEventListener("click", function (event) {
     event.preventDefault();
