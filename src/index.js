@@ -85,11 +85,16 @@ function initializeCode() {
 
     //console.log(document.querySelector("td").parentNode)
     //console.log(document.querySelector("data"))
-
+/*
     while (document.querySelector("td") !== null) {
       let tr = document.querySelector("td").parentNode
       tr.parentElement.removeChild(tr)
     }
+*/
+    let trsToBeRemoved = document.querySelectorAll("tr")
+    for (let i=0; i<trsToBeRemoved.length; i++) {
+      trsToBeRemoved[i].parentElement.removeChild(trsToBeRemoved[i])
+    } 
 
   })
 
