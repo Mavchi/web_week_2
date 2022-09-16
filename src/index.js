@@ -40,7 +40,7 @@ function initializeCode() {
         // see if correct bracket and line to be updated with new information
         if (tableLinesElements[i].querySelector("td").innerText === usernameElement.value) {
           let allComponents = tableLinesElements[i].querySelectorAll("td")
-          // order of td: username = 0 / email = 1 / address = 2 / admin = 3
+          // order of td: username = 0 / email = 1 / address = 2 / admin = 3 / image = 4
           allComponents[1].innerText = emailElement.value
           allComponents[2].innerText = addressElement.value
           allComponents[3].innerText = (adminElement.checked === true) ? "X" : "-"
@@ -57,11 +57,24 @@ function initializeCode() {
       thAddress.innerText = addressElement.value
       let thAdmin = document.createElement("td")
       thAdmin.innerText = (adminElement.checked === true) ? "X" : "-"
+      let thImage = document.createElement("td")
+      // see if given image file as paramenter to be added
+      const imageFile = document.querySelector("#input-image").files[0]
+      if (!imageFile) {
+        // console.log("no image file detected in parameter of file-input")
+      } else {
+        const img = document.createElement("img")
+        img.src = URLmkl.ö.createObjectURL(imageFile)
+        img.height = 64
+        img.width = 64
+        thImage.appendChild(img)
+     }
 
       lineOfTable.appendChild(thUsername)
       lineOfTable.appendChild(thEmail)
       lineOfTable.appendChild(thAddress)
       lineOfTable.appendChild(thAdmin)
+      lineOfTable.appendChild(thImage)
 
       tableElement.appendChild(lineOfTable)
     }
@@ -80,8 +93,7 @@ function initializeCode() {
 
   })
 
-
-  const container = document.querySelector("#image-container")
+/*
   uploadButton.addEventListener("click", function () {
     const imageFile = document.querySelector("#input-image").files[0]
     let imageSrc = ""
@@ -93,5 +105,6 @@ function initializeCode() {
     img.width = 64
     container.appendChild(img)
   }) 
+*/
 }
 

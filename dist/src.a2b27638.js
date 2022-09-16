@@ -231,7 +231,7 @@ function initializeCode() {
       for (var _i = 1; _i < tableLinesElements.length; _i++) {
         // see if correct bracket and line to be updated with new information
         if (tableLinesElements[_i].querySelector("td").innerText === usernameElement.value) {
-          var allComponents = tableLinesElements[_i].querySelectorAll("td"); // order of td: username = 0 / email = 1 / address = 2 / admin = 3
+          var allComponents = tableLinesElements[_i].querySelectorAll("td"); // order of td: username = 0 / email = 1 / address = 2 / admin = 3 / image = 4
 
 
           allComponents[1].innerText = emailElement.value;
@@ -249,10 +249,24 @@ function initializeCode() {
       thAddress.innerText = addressElement.value;
       var thAdmin = document.createElement("td");
       thAdmin.innerText = adminElement.checked === true ? "X" : "-";
+      var thImage = document.createElement("td"); // see if given image file as paramenter to be added
+
+      var imageFile = document.querySelector("#input-image").files[0];
+
+      if (!imageFile) {// console.log("no image file detected in parameter of file-input")
+      } else {
+        var img = document.createElement("img");
+        img.src = URLmkl.ö.createObjectURL(imageFile);
+        img.height = 64;
+        img.width = 64;
+        thImage.appendChild(img);
+      }
+
       lineOfTable.appendChild(thUsername);
       lineOfTable.appendChild(thEmail);
       lineOfTable.appendChild(thAddress);
       lineOfTable.appendChild(thAdmin);
+      lineOfTable.appendChild(thImage);
       tableElement.appendChild(lineOfTable);
     }
   });
@@ -265,17 +279,19 @@ function initializeCode() {
       tr.parentElement.removeChild(tr);
     }
   });
-  var container = document.querySelector("#image-container");
-  uploadButton.addEventListener("click", function () {
-    var imageFile = document.querySelector("#input-image").files[0];
-    var imageSrc = "";
-    if (!imageFile) return;
-    var img = document.createElement("img");
-    img.src = URL.createObjectURL(imageFile);
-    img.height = 64;
-    img.width = 64;
-    container.appendChild(img);
-  });
+  /*
+    uploadButton.addEventListener("click", function () {
+      const imageFile = document.querySelector("#input-image").files[0]
+      let imageSrc = ""
+      if(!imageFile) return
+  
+      const img = document.createElement("img")
+      img.src = URL.createObjectURL(imageFile)
+      img.height = 64
+      img.width = 64
+      container.appendChild(img)
+    }) 
+  */
 }
 },{"./styles.css":"src/styles.css"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
