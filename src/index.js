@@ -1,12 +1,12 @@
 import "./styles.css";
 
-if(document.readyState !== "loading") {
+if (document.readyState !== "loading") {
   console.log("Document is ready!");
   initializeCode();
 } else {
-  document.addEventListener("DOMContentLoaded", function() {
-      console.log("Document is ready after waiting!");
-      initializeCode();
+  document.addEventListener("DOMContentLoaded", function () {
+    console.log("Document is ready after waiting!");
+    initializeCode();
   })
 }
 
@@ -17,36 +17,54 @@ function initializeCode() {
   const addressElement = document.querySelector("#input-address")
   const adminElement = document.querySelector("#input-admin")
   const emptyButton = document.querySelector("#empty-data")
-
+  const uploadButton = document.querySelector("#upload")
   const tableElement = document.querySelector("table")
-  
+
   submitButton.addEventListener("click", function (event) {
     event.preventDefault()
 
-    let lineOfTable = document.createElement("tr")
+    const tableLinesElements = document.querySelectorAll("tr")
 
-    let thUsername = document.createElement("td")
-    thUsername.innerText = usernameElement.value
-    let thEmail = document.createElement("td")
-    thEmail.innerText = emailElement.value
-    let thAddress = document.createElement("td")
-    thAddress.innerText = addressElement.value
-    let thAdmin = document.createElement("td")
-    thAdmin.innerText = (adminElement.checked === true) ? "X" : "-"
+    // let's find out if given username already exists in our database-set
+    let usernameAlreadyIncluded = false
+    for (let i = 1; i < tableLinesElements.length; i++) {
+      if (tableLinesElements[i].querySelector("td").innerText === usernameElement.value) {
+        usernameAlreadyIncluded = true
+      }
+    }
 
-    lineOfTable.appendChild(thUsername)
-    lineOfTable.appendChild(thEmail)
-    lineOfTable.appendChild(thAddress)
-    lineOfTable.appendChild(thAdmin)
+    // if username exists we simply update (stright below)
+    // after else we expect to add unique addition without conditionals attached
+    if (usernameAlreadyIncluded) {
+      for (let i = 1; i < tableLinesElements.length; i++) {
+        // see if correct bracket and line to be updated with new information
+        if (tableLinesElements[i].querySelector("td").innerText === usernameElement.value) {
+          let allComponents = tableLinesElements[i].querySelectorAll("td")
+          // order of td: username = 0 / email = 1 / address = 2 / admin = 3
+          allComponents[1].innerText = emailElement.value
+          allComponents[2].innerText = addressElement.value
+          allComponents[3].innerText = (adminElement.checked === true) ? "X" : "-"
+        }
+      }
+    } else {
+      let lineOfTable = document.createElement("tr")
 
-    tableElement.appendChild(lineOfTable)
+      let thUsername = document.createElement("td")
+      thUsername.innerText = usernameElement.value
+      let thEmail = document.createElement("td")
+      thEmail.innerText = emailElement.value
+      let thAddress = document.createElement("td")
+      thAddress.innerText = addressElement.value
+      let thAdmin = document.createElement("td")
+      thAdmin.innerText = (adminElement.checked === true) ? "X" : "-"
 
-    /*
-    console.log(usernameElement.value)
-    console.log(emailElement.value)
-    console.log(addressElement.value)
-    console.log(adminElement.checked)
-    */
+      lineOfTable.appendChild(thUsername)
+      lineOfTable.appendChild(thEmail)
+      lineOfTable.appendChild(thAddress)
+      lineOfTable.appendChild(thAdmin)
+
+      tableElement.appendChild(lineOfTable)
+    }
   })
 
   emptyButton.addEventListener("click", function (event) {
@@ -61,5 +79,19 @@ function initializeCode() {
     }
 
   })
+
+
+  const container = document.querySelector("#image-container")
+  uploadButton.addEventListener("click", function () {
+    const imageFile = document.querySelector("#input-image").files[0]
+    let imageSrc = ""
+    if(!imageFile) return
+
+    const img = document.createElement("img")
+    img.src = URL.createObjectURL(imageFile)
+    img.height = 64
+    img.width = 64
+    container.appendChild(img)
+  }) 
 }
 

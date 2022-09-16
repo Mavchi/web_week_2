@@ -211,29 +211,50 @@ function initializeCode() {
   var addressElement = document.querySelector("#input-address");
   var adminElement = document.querySelector("#input-admin");
   var emptyButton = document.querySelector("#empty-data");
+  var uploadButton = document.querySelector("#upload");
   var tableElement = document.querySelector("table");
   submitButton.addEventListener("click", function (event) {
     event.preventDefault();
-    var lineOfTable = document.createElement("tr");
-    var thUsername = document.createElement("td");
-    thUsername.innerText = usernameElement.value;
-    var thEmail = document.createElement("td");
-    thEmail.innerText = emailElement.value;
-    var thAddress = document.createElement("td");
-    thAddress.innerText = addressElement.value;
-    var thAdmin = document.createElement("td");
-    thAdmin.innerText = adminElement.checked === true ? "X" : "-";
-    lineOfTable.appendChild(thUsername);
-    lineOfTable.appendChild(thEmail);
-    lineOfTable.appendChild(thAddress);
-    lineOfTable.appendChild(thAdmin);
-    tableElement.appendChild(lineOfTable);
-    /*
-    console.log(usernameElement.value)
-    console.log(emailElement.value)
-    console.log(addressElement.value)
-    console.log(adminElement.checked)
-    */
+    var tableLinesElements = document.querySelectorAll("tr"); // let's find out if given username already exists in our database-set
+
+    var usernameAlreadyIncluded = false;
+
+    for (var i = 1; i < tableLinesElements.length; i++) {
+      if (tableLinesElements[i].querySelector("td").innerText === usernameElement.value) {
+        usernameAlreadyIncluded = true;
+      }
+    } // if username exists we simply update (stright below)
+    // after else we expect to add unique addition without conditionals attached
+
+
+    if (usernameAlreadyIncluded) {
+      for (var _i = 1; _i < tableLinesElements.length; _i++) {
+        // see if correct bracket and line to be updated with new information
+        if (tableLinesElements[_i].querySelector("td").innerText === usernameElement.value) {
+          var allComponents = tableLinesElements[_i].querySelectorAll("td"); // order of td: username = 0 / email = 1 / address = 2 / admin = 3
+
+
+          allComponents[1].innerText = emailElement.value;
+          allComponents[2].innerText = addressElement.value;
+          allComponents[3].innerText = adminElement.checked === true ? "X" : "-";
+        }
+      }
+    } else {
+      var lineOfTable = document.createElement("tr");
+      var thUsername = document.createElement("td");
+      thUsername.innerText = usernameElement.value;
+      var thEmail = document.createElement("td");
+      thEmail.innerText = emailElement.value;
+      var thAddress = document.createElement("td");
+      thAddress.innerText = addressElement.value;
+      var thAdmin = document.createElement("td");
+      thAdmin.innerText = adminElement.checked === true ? "X" : "-";
+      lineOfTable.appendChild(thUsername);
+      lineOfTable.appendChild(thEmail);
+      lineOfTable.appendChild(thAddress);
+      lineOfTable.appendChild(thAdmin);
+      tableElement.appendChild(lineOfTable);
+    }
   });
   emptyButton.addEventListener("click", function (event) {
     event.preventDefault(); //console.log(document.querySelector("td").parentNode)
@@ -243,6 +264,17 @@ function initializeCode() {
       var tr = document.querySelector("td").parentNode;
       tr.parentElement.removeChild(tr);
     }
+  });
+  var container = document.querySelector("#image-container");
+  uploadButton.addEventListener("click", function () {
+    var imageFile = document.querySelector("#input-image").files[0];
+    var imageSrc = "";
+    if (!imageFile) return;
+    var img = document.createElement("img");
+    img.src = URL.createObjectURL(imageFile);
+    img.height = 64;
+    img.width = 64;
+    container.appendChild(img);
   });
 }
 },{"./styles.css":"src/styles.css"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
