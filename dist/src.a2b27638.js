@@ -211,24 +211,24 @@ function initializeCode() {
   var addressElement = document.querySelector("#input-address");
   var adminElement = document.querySelector("#input-admin");
   var emptyButton = document.querySelector("#empty-data");
-  var uploadButton = document.querySelector("#upload");
   var tableElement = document.querySelector("tbody");
   submitButton.addEventListener("click", function (event) {
     event.preventDefault();
-    var tableLinesElements = document.querySelectorAll("tr"); // let's find out if given username already exists in our database-set
+    var tableLinesElements = document.querySelectorAll("tbody tr"); // let's find out if given username already exists in our database-set
 
     var usernameAlreadyIncluded = false;
 
-    for (var i = 1; i < tableLinesElements.length; i++) {
+    for (var i = 0; i < tableLinesElements.length; i++) {
       if (tableLinesElements[i].querySelector("td").innerText === usernameElement.value) {
         usernameAlreadyIncluded = true;
       }
-    } // if username exists we simply update (stright below)
+    } //console.log(usernameAlreadyIncluded)
+    // if username exists we simply update (stright below)
     // after else we expect to add unique addition without conditionals attached
 
 
     if (usernameAlreadyIncluded) {
-      for (var _i = 1; _i < tableLinesElements.length; _i++) {
+      for (var _i = 0; _i < tableLinesElements.length; _i++) {
         // see if correct bracket and line to be updated with new information
         if (tableLinesElements[_i].querySelector("td").innerText === usernameElement.value) {
           var allComponents = tableLinesElements[_i].querySelectorAll("td"); // order of td: username = 0 / email = 1 / address = 2 / admin = 3 / image = 4
@@ -256,7 +256,7 @@ function initializeCode() {
       if (!imageFile) {// console.log("no image file detected in parameter of file-input")
       } else {
         var img = document.createElement("img");
-        img.src = URLmkl.ö.createObjectURL(imageFile);
+        img.src = URL.createObjectURL(imageFile);
         img.height = 64;
         img.width = 64;
         thImage.appendChild(img);
@@ -275,21 +275,20 @@ function initializeCode() {
     //console.log(document.querySelector("data"))
 
     /*
-        while (document.querySelector("td") !== null) {
-          let tr = document.querySelector("td").parentNode
-          tr.parentElement.removeChild(tr)
-        }
+    while (document.querySelector("td") !== null) {
+      let tr = document.querySelector("td").parentNode
+      tr.parentElement.removeChild(tr)
+    }
     */
 
     /*
-        let trsToBeRemoved = document.getElementsByTagName("tr")
-    
-        trsToBeRemoved.forEach((element, index) => {
-          if (index !== 0) {
-            HTMLCollection.item()
-            tr.parentElement.removeChild(tr)
-          }
-        })
+    let trsToBeRemoved = document.getElementsByTagName("tr")
+     trsToBeRemoved.forEach((element, index) => {
+      if (index !== 0) {
+        HTMLCollection.item()
+        tr.parentElement.removeChild(tr)
+      }
+    })
     */
 
     var trsToBeRemoved = document.querySelectorAll("tbody tr");
@@ -299,17 +298,16 @@ function initializeCode() {
     }
   });
   /*
-    uploadButton.addEventListener("click", function () {
-      const imageFile = document.querySelector("#input-image").files[0]
-      let imageSrc = ""
-      if(!imageFile) return
-  
-      const img = document.createElement("img")
-      img.src = URL.createObjectURL(imageFile)
-      img.height = 64
-      img.width = 64
-      container.appendChild(img)
-    }) 
+  uploadButton.addEventListener("click", function () {
+    const imageFile = document.querySelector("#input-image").files[0]
+    let imageSrc = ""
+    if(!imageFile) return
+     const img = document.createElement("img")
+    img.src = URL.createObjectURL(imageFile)
+    img.height = 64
+    img.width = 64
+    container.appendChild(img)
+  }) 
   */
 }
 },{"./styles.css":"src/styles.css"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
