@@ -18,7 +18,7 @@ function initializeCode() {
   const adminElement = document.querySelector("#input-admin")
   const emptyButton = document.querySelector("#empty-data")
   const uploadButton = document.querySelector("#upload")
-  const tableElement = document.querySelector("table")
+  const tableElement = document.querySelector("tbody")
 
   submitButton.addEventListener("click", function (event) {
     event.preventDefault()
@@ -91,10 +91,23 @@ function initializeCode() {
       tr.parentElement.removeChild(tr)
     }
 */
-    let trsToBeRemoved = document.querySelectorAll("tr")
-    for (let i=1; i<trsToBeRemoved.length; i++) {
+/*
+    let trsToBeRemoved = document.getElementsByTagName("tr")
+
+    trsToBeRemoved.forEach((element, index) => {
+      if (index !== 0) {
+        HTMLCollection.item()
+        tr.parentElement.removeChild(tr)
+      }
+    })
+*/
+    
+    
+    let trsToBeRemoved = document.querySelectorAll("tbody tr")
+    for (let i=0; i<trsToBeRemoved.length; i++) {
       trsToBeRemoved[i].parentElement.removeChild(trsToBeRemoved[i])
     } 
+    
 
   })
 

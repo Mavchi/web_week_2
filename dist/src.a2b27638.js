@@ -212,7 +212,7 @@ function initializeCode() {
   var adminElement = document.querySelector("#input-admin");
   var emptyButton = document.querySelector("#empty-data");
   var uploadButton = document.querySelector("#upload");
-  var tableElement = document.querySelector("table");
+  var tableElement = document.querySelector("tbody");
   submitButton.addEventListener("click", function (event) {
     event.preventDefault();
     var tableLinesElements = document.querySelectorAll("tr"); // let's find out if given username already exists in our database-set
@@ -281,9 +281,20 @@ function initializeCode() {
         }
     */
 
-    var trsToBeRemoved = document.querySelectorAll("tr");
+    /*
+        let trsToBeRemoved = document.getElementsByTagName("tr")
+    
+        trsToBeRemoved.forEach((element, index) => {
+          if (index !== 0) {
+            HTMLCollection.item()
+            tr.parentElement.removeChild(tr)
+          }
+        })
+    */
 
-    for (var i = 1; i < trsToBeRemoved.length; i++) {
+    var trsToBeRemoved = document.querySelectorAll("tbody tr");
+
+    for (var i = 0; i < trsToBeRemoved.length; i++) {
       trsToBeRemoved[i].parentElement.removeChild(trsToBeRemoved[i]);
     }
   });
